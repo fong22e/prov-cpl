@@ -3,14 +3,15 @@ echo "Installing Prov system (dev mode for Dataverse developers)..."
 
 echo "Building CPL library..."
 sudo apt-get update
-sudo apt-get install -y make g++ libboost-dev unixodbc-dev
-cd /prov-cpl
+sudo apt-get install -y make g++ libboost-dev unixodbc-dev git
+git clone https://github.com/fong22e/prov-cpl.git
+cd /home/vagrant/prov-cpl
 wget --quiet https://github.com/nlohmann/json/releases/download/v3.0.1/json.hpp
 mv json.hpp include
 sudo make install
 
 echo "Build dependencies for Python REST service..."
-cd /prov-cpl/bindings/python
+cd /home/vagrant/prov-cpl/bindings/python
 sudo apt-get install -y swig python-dev
 # 1 GB was too little memory for `make release`.
 make release
@@ -42,7 +43,7 @@ cat /etc/odbc.ini
 
 echo "Install and configure PostgreSQL..."
 sudo apt-get install -y postgresql
-cp /etc/postgresql/9.5/main/pg_hba.conf /prov-cpl
+cp /etc/postgresql/9.5/main/pg_hba.conf /home/vagrant/prov-cpl
 #FIXME: delete this
 #local   all             postgres                                peer
 sudo cat << PG_HBA_CONTENT > /etc/postgresql/9.5/main/pg_hba.conf
@@ -55,11 +56,11 @@ sudo cat /etc/postgresql/9.5/main/pg_hba.conf
 sudo /etc/init.d/postgresql restart
 
 echo "Create database..."
-sudo psql -U postgres postgres < /prov-cpl/scripts/postgresql-setup-default.sql
+sudo psql -U postgres postgres < /home/vagrant/prov-cpl/scripts/postgresql-setup-default.sql
 
 echo "Install dependencies for CPL REST service..."
 sudo apt-get install -y python-pip
 sudo pip install flask
-cd /prov-cpl/bindings/python/RestAPI
+cd /home/vagrant/prov-cpl/bindings/python/RestAPI
 REST_SERVICE_USER=postgres # FIXME: create a "cplrest" user?
 su $REST_SERVICE_USER -s /bin/sh -c "python cpl-rest.py --host=0.0.0.0"
