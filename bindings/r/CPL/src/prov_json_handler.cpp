@@ -1,3 +1,5 @@
+//[[Rcpp::depends(CPL)]]
+
 #include <cplxx.h>
 #include <backends/cpl-odbc.h>
 #include <Rcpp.h>
