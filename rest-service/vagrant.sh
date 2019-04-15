@@ -10,7 +10,7 @@ usermod -aG sudo cpl
 # desktop and pgAdmin
 echo "Install Desktop and pgAdmin3"
 apt-get update
-#apt-get install --no-install-recommends ubuntu-desktop
+apt-get install --no-install-recommends ubuntu-desktop
 apt-get install pgadmin3
 
 # build library
