@@ -117,4 +117,5 @@ mkdir R
 chown -R cpl R
 
 # Install Rcpp
+echo "Install Rcpp"
 R -e 'install.packages("Rcpp", repos="https://cloud.r-project.org")'
