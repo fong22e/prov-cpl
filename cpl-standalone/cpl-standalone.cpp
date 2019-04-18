@@ -1793,10 +1793,18 @@ import_objects_json(const int type,
 		cpl_id_t obj_id = CPL_NONE;
 
 		token_pair_t pair = name_to_tokens(it.key());
-
-		if(!CPL_IS_OK(cpl_create_object(pair.first.c_str(), pair.second.c_str(), type, bundle_id, &obj_id))){
+		
+		// EF EDITS
+		std::string first = (std::string) pair.first;
+		std::string second = (std::string) pair.second;
+		
+		if(!CPL_IS_OK(cpl_create_object(first.c_str(), second.c_str(), type, bundle_id, &obj_id))){
 			return CPL_E_INTERNAL_ERROR;
 		}
+		
+		/*if(!CPL_IS_OK(cpl_create_object(pair.first.c_str(), pair.second.c_str(), type, bundle_id, &obj_id))){
+			return CPL_E_INTERNAL_ERROR;
+		}*/
 
 		lookup_tbl.emplace(it.key(), obj_id);
 
@@ -1804,9 +1812,14 @@ import_objects_json(const int type,
 		for (json::iterator it2 = properties.begin(); it2 != properties.end(); ++it2){
 
 			pair = name_to_tokens(it2.key());
+			
+			// EF EDITS
+			first = (std::string) pair.first;
+			second = (std::string) pair.second;
 
 			json val_json = *it2;
-			if(!val_json.is_array() && !val_json.is_object()){
+			// EF EDITS
+			/*if(!val_json.is_array() && !val_json.is_object()){
 				if(!CPL_IS_OK(cpl_add_object_property(obj_id, 
 													  pair.first.c_str(), 
 													  pair.second.c_str(), 
@@ -1817,6 +1830,21 @@ import_objects_json(const int type,
 				if(!CPL_IS_OK(cpl_add_object_property(obj_id, 
 													  pair.first.c_str(), 
 													  pair.second.c_str(), 
+													  val_json.dump().c_str()))){
+					return CPL_E_INTERNAL_ERROR;
+				}
+			}*/
+			if(!val_json.is_array() && !val_json.is_object()){
+				if(!CPL_IS_OK(cpl_add_object_property(obj_id, 
+													  first.c_str(), 
+													  second.c_str(), 
+													  val_json.get<std::string>().c_str()))){
+					return CPL_E_INTERNAL_ERROR;
+				}
+			} else {
+				if(!CPL_IS_OK(cpl_add_object_property(obj_id, 
+													  first.c_str(), 
+													  second.c_str(), 
 													  val_json.dump().c_str()))){
 					return CPL_E_INTERNAL_ERROR;
 				}
