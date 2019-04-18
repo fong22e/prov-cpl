@@ -1,0 +1,20 @@
+{
+	"entity" : {
+		"rdt:l1": {
+			"name": "base",
+			"version": "3.5.2",
+			"prov:type": {
+				"$": "prov:Collection",
+				"type": "xsd:QName"
+			}
+		},
+		"rdt:l2": {
+			"name": "datasets",
+			"version": "3.5.2",
+			"prov:type": {
+				"$": "prov:Collection",
+				"type": "xsd:QName"
+			}
+		}
+	}
+}
