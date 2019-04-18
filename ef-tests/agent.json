@@ -1,9 +1,0 @@
-{
-	"agent" : {
-		"rdt:a1": {
-			"rdt:tool.name": "rdtLite",
-			"rdt:tool.version": "1.0.3",
-			"rdt:json.version": "2.1"
-		}
-	}
-}

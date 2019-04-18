@@ -1,6 +1,0 @@
-{
-	"prefix": {
-		"prov": "http://www.w3.org/ns/prov#",
-		"rdt": "https://github.com/End-to-end-provenance/ExtendedProvJson/blob/master/JSON-format.md"
-	}
-}
