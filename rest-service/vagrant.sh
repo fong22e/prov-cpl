@@ -60,7 +60,7 @@ cat /usr/local/etc/odbcinst.ini
 cat << ODBC_CONTENT > /etc/odbc.ini
 [CPL]
 Description     = PostgreSQL Core Provenance Library
-Driver          = PostgreSQL
+Driver          = PostgreSQL Unicode
 Server          = localhost
 Database        = cpl
 Port            =
