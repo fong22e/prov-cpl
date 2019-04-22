@@ -1977,6 +1977,9 @@ import_document_json(const std::string& json_string,
 					 const int flags,
 					 cpl_id_t* out_id)
 {
+	// EF EDITS
+	cout << "inside import_document_json";
+	
 	json document = json::parse(json_string);
 	int extern_obj_f = (flags && CPL_J_EXTERN_OBJ) ? 1 : 0;
 

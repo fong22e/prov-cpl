@@ -28,7 +28,6 @@ unsigned long long
 import_document_json_r(const std::string& string,
 					   const std::string& bundle_name)
 {	
-
 	unsigned long long out_id;
 	import_document_json(string, bundle_name, std::vector<std::pair<cpl_id_t, std::string>>(), 0, &out_id);
 
