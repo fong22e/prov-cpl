@@ -39,6 +39,7 @@
 
 // EF EDITS
 #include <iostream>
+using namespace std;
 
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
