@@ -37,6 +37,9 @@
 #include "cpl-platform.h"
 #include <private/cpl-platform.h>
 
+// EF EDITS
+#include <iostream>
+
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
 #endif
