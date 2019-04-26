@@ -1848,7 +1848,7 @@ import_objects_json(const int type,
 			}*/
 			if(!val_json.is_array() && !val_json.is_object()){
 				// EF EDITS: check for numeric value
-				if(val_json.std::is_floating_point() && !CPL_IS_OK(cpl_add_object_property(obj_id, 
+				if(val_json.is_number() && !CPL_IS_OK(cpl_add_object_property(obj_id, 
 													  first.c_str(), 
 													  second.c_str(), 
 													  std::to_string(val_json.get<double>()))){
