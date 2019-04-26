@@ -1847,16 +1847,12 @@ import_objects_json(const int type,
 				}
 			}*/
 			if(!val_json.is_array() && !val_json.is_object()){
-				// EF EDITS: check for boolean value
-				if(val_json.is_bool())
-				{
-					bool val = val_json.get<bool>() ? "true" : "false";
-					if( !CPL_IS_OK(cpl_add_object_property(obj_id, 
+				// EF EDITS: check for numeric value
+				if(val_json.std::is_floating_point() && !CPL_IS_OK(cpl_add_object_property(obj_id, 
 													  first.c_str(), 
 													  second.c_str(), 
-													  val))){
-						return CPL_E_INTERNAL_ERROR;
-					}
+													  std::to_string(val_json.get<double>()))){
+					return CPL_E_INTERNAL_ERROR;
 				}
 			} else {
 				if(!CPL_IS_OK(cpl_add_object_property(obj_id, 
