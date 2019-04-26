@@ -1982,9 +1982,12 @@ import_document_json(const std::string& json_string,
 					 cpl_id_t* out_id)
 {
 	// EF EDITS
-	cout << "inside import_document_json";
+	cout << "inside import_document_json   ";
 	
 	json document = json::parse(json_string);
+	
+	cout << "after json parse   ";
+	
 	int extern_obj_f = (flags && CPL_J_EXTERN_OBJ) ? 1 : 0;
 
 	if(document == NULL || document.empty()){
@@ -2004,10 +2007,15 @@ import_document_json(const std::string& json_string,
 	if(!CPL_IS_OK(import_bundle_prefixes_json(bundle_id, document))){
 		goto error;
 	}
-	// Import objects
+	// Import objects - EF EDITS: WHERE IT STARTS TO FAIL!!!!
+	cout << "before importing entities   ";
+	
 	if(!CPL_IS_OK(import_objects_json(CPL_ENTITY, CPL_ENTITY_STR, bundle_id, lookup_tbl, document))){
 		goto error;
 	}
+	
+	cout << "after importing entities   ";
+	
 	if(!CPL_IS_OK(import_objects_json(CPL_AGENT, CPL_AGENT_STR, bundle_id, lookup_tbl, document))){
 		goto error;
 	}
