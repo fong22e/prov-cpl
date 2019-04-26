@@ -1799,8 +1799,8 @@ import_objects_json(const int type,
 		token_pair_t pair = name_to_tokens(it.key());
 		
 		// EF EDITS
-		cout << "     first iter: pair.first = " << pair.first;
-		cout << "     first iter: pair.second = " << pair.second;
+		cout << "     first iter: pair.first = " << pair.first << "\n";
+		cout << "     first iter: pair.second = " << pair.second << "\n";
 		
 		// EF EDITS
 		std::string first = (std::string) pair.first;
@@ -1822,8 +1822,8 @@ import_objects_json(const int type,
 			pair = name_to_tokens(it2.key());
 			
 			// EF EDITS
-			cout << "     second iter: pair.first = " << pair.first;
-			cout << "     second iter: pair.second = " << pair.second;
+			cout << "second iter: pair.first = " << pair.first << "\n";
+			cout << "second iter: pair.second = " << pair.second << "\n";
 			
 			// EF EDITS
 			first = (std::string) pair.first;
@@ -1847,10 +1847,11 @@ import_objects_json(const int type,
 				}
 			}*/
 			if(!val_json.is_array() && !val_json.is_object()){
-				if(!CPL_IS_OK(cpl_add_object_property(obj_id, 
+				// EF EDITS: check for boolean value
+				if(val_json.is_bool() && !CPL_IS_OK(cpl_add_object_property(obj_id, 
 													  first.c_str(), 
 													  second.c_str(), 
-													  val_json.get<std::string>().c_str()))){
+													  val_json.get<bool>().c_str()))){
 					return CPL_E_INTERNAL_ERROR;
 				}
 			} else {
@@ -1990,11 +1991,11 @@ import_document_json(const std::string& json_string,
 					 cpl_id_t* out_id)
 {
 	// EF EDITS
-	cout << "inside import_document_json   ";
+	cout << "inside import_document_json\n";
 	
 	json document = json::parse(json_string);
 	
-	cout << "after json parse   ";
+	cout << "after json parse\n";
 	
 	int extern_obj_f = (flags && CPL_J_EXTERN_OBJ) ? 1 : 0;
 
@@ -2015,14 +2016,15 @@ import_document_json(const std::string& json_string,
 	if(!CPL_IS_OK(import_bundle_prefixes_json(bundle_id, document))){
 		goto error;
 	}
-	// Import objects - EF EDITS: WHERE IT STARTS TO FAIL!!!!
-	cout << "before importing entities   ";
+	// Import objects
+	//EF EDITS: WHERE IT STARTS TO FAIL!!!!
+	cout << "before importing entities\n";
 	
 	if(!CPL_IS_OK(import_objects_json(CPL_ENTITY, CPL_ENTITY_STR, bundle_id, lookup_tbl, document))){
 		goto error;
 	}
 	
-	cout << "after importing entities   ";
+	cout << "after importing entities\n";
 	
 	if(!CPL_IS_OK(import_objects_json(CPL_AGENT, CPL_AGENT_STR, bundle_id, lookup_tbl, document))){
 		goto error;
