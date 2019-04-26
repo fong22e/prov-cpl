@@ -1851,7 +1851,7 @@ import_objects_json(const int type,
 				if(val_json.is_number() && !CPL_IS_OK(cpl_add_object_property(obj_id, 
 													  first.c_str(), 
 													  second.c_str(), 
-													  std::to_string(val_json.get<double>()))){
+													  val_json.get<double>().str().c_str()))){
 					return CPL_E_INTERNAL_ERROR;
 				}
 			} else {
