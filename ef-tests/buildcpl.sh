@@ -1,4 +1,4 @@
-pushd /home/cpl/prov-cpl
+cd /home/cpl/prov-cpl
 
 # uninstall CPL
 sudo make uninstall
@@ -14,5 +14,3 @@ sudo make install
 
 # install r bindings
 sh bindings/r/install-bindings-r.sh
-
-popd
