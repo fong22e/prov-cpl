@@ -1799,6 +1799,10 @@ import_objects_json(const int type,
 		token_pair_t pair = name_to_tokens(it.key());
 		
 		// EF EDITS
+		cout << "     first iter: pair.first = " << pair.first;
+		cout << "     first iter: pair.second = " << pair.second;
+		
+		// EF EDITS
 		std::string first = (std::string) pair.first;
 		std::string second = (std::string) pair.second;
 		
@@ -1816,6 +1820,10 @@ import_objects_json(const int type,
 		for (json::iterator it2 = properties.begin(); it2 != properties.end(); ++it2){
 
 			pair = name_to_tokens(it2.key());
+			
+			// EF EDITS
+			cout << "     second iter: pair.first = " << pair.first;
+			cout << "     second iter: pair.second = " << pair.second;
 			
 			// EF EDITS
 			first = (std::string) pair.first;
